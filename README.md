@@ -41,11 +41,18 @@ interview read-through, it does the job well.
 
 ## Companion project
 
-A GitHub Actions edition shares `core.py` verbatim and runs the same synthesis on
-a free Actions runner for anyone with a GitHub account, at the cost of requiring a
-fixed `SPEAKER: text` script format instead of free-form input.
+A [GitHub Actions edition](https://github.com/hyperhodge/clodcaster-actions)
+shares `core.py` verbatim and runs the same synthesis on a free Actions runner for
+anyone with a GitHub account, at the cost of requiring a fixed `SPEAKER: text`
+script format instead of free-form input.
 
 ## Credits
 
 Voices: [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) via
 [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx), Apache-2.0.
+
+## Licence
+
+Apache 2.0. See [LICENSE](./LICENSE) and [NOTICE](./NOTICE). Built on the
+Apache-2.0 licensed Kokoro model; voice weights are fetched at runtime, not
+redistributed here.

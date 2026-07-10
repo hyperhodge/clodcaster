@@ -1,0 +1,10 @@
+ClodCaster
+Copyright 2026 James Hodge / Hodge Advisory
+
+This product includes and relies on the Kokoro text-to-speech model
+(https://huggingface.co/hexgrad/Kokoro-82M) and the kokoro-onnx package
+(https://github.com/thewh1teagle/kokoro-onnx), which are licensed under the
+Apache License, Version 2.0.
+
+Voice model weights are downloaded at runtime from a public GitHub release and
+are not redistributed in this repository.
