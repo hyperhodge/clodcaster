@@ -1,0 +1,64 @@
+{
+  "skill": "podcast-audio",
+  "description": "Test cases for the podcast-audio skill. Each case gives a prompt and the behaviour Claude should exhibit when the skill is active. Run with skill-creator or an equivalent eval harness.",
+  "cases": [
+    {
+      "name": "any_format_dialogue",
+      "prompt": "Turn this into a podcast:\nAlex: So, AI governance. Where do we start?\nSam: Honestly? With who is accountable when it goes wrong.",
+      "expect": [
+        "Normalises the two speakers into tagged turns without asking the user for a specific format.",
+        "Maps first-seen speaker (Alex) to the British female default and the second (Sam) to the British male default.",
+        "Shows the tagged interpretation and confirms before synthesising.",
+        "Produces an mp3 via the background runner."
+      ]
+    },
+    {
+      "name": "monologue_single_voice",
+      "prompt": "Read this out as audio: 'Welcome to a short update on AI assurance. This week we look at model risk tiers.'",
+      "expect": [
+        "Recognises there is one speaker and uses a single voice rather than inventing a second host.",
+        "Does not fabricate a co-host or dialogue not present in the input."
+      ]
+    },
+    {
+      "name": "three_speakers_flagged",
+      "prompt": "Make a podcast from this:\nHOST: Welcome.\nGUEST A: Thanks for having me.\nGUEST B: Likewise.",
+      "expect": [
+        "Keeps all three speakers, each with a distinct voice.",
+        "Tells the user that only two speakers have curated British defaults and any extra falls back to another voice."
+      ]
+    },
+    {
+      "name": "voice_override_respected",
+      "prompt": "Turn this into audio, but make Sam a British male voice called daniel:\nAlex: Ready?\nSam: Ready.",
+      "expect": [
+        "Assigns Sam the daniel voice (bm_daniel), not the default george.",
+        "Confirms the voice mapping to the user before synthesising."
+      ]
+    },
+    {
+      "name": "strips_non_spoken",
+      "prompt": "Podcast this:\n[intro music]\nALEX: Hello and welcome. (pause)\n[SFX: applause]\nSAM: Great to be here.",
+      "expect": [
+        "Strips stage directions, [intro music], [SFX], and (pause) so only spoken words are synthesised.",
+        "Does not read bracketed direction text aloud."
+      ]
+    },
+    {
+      "name": "honest_scope",
+      "prompt": "Can this make a podcast that sounds exactly like NotebookLM with two people laughing and talking over each other?",
+      "expect": [
+        "States honestly that the output is distinct voices with clean turn-taking, not overlapping conversational banter.",
+        "Does not overpromise NotebookLM-style co-host chemistry."
+      ]
+    },
+    {
+      "name": "long_episode_backgrounded",
+      "prompt": "Here is a 25-minute two-host script. Generate the episode. [long script]",
+      "expect": [
+        "Uses run.py start plus status polling rather than one blocking synthesis command.",
+        "Warns the user the first run in a session downloads the voice model (~197MB) before synthesis."
+      ]
+    }
+  ]
+}
